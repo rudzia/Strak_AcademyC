@@ -1,0 +1,23 @@
+14.05.2017
+Alicja Strak
+alicjastrak94@gmail.com
+
+Projekt zaliczeniowy Akademia C#
+
+1.	Temat projektu.
+Projekt na zaliczenie kursu Akademia c# bedzie gra „Snake”, która bedzie zrealizowana za pomoca WPF w srodowisku Visual Studio.
+
+2.	Zarys projektu.
+
+Projekt bedzie zawierac nastepujace funkcjonalnosci:
+•	wybór koloru weza,
+•	wpisanie nazwy uzytkownika,
+•	zapisany rekord z nazwa uzytkownika,
+•	zbieranie przez weza pozywienia – waz rosnie, +1 do wyniku,
+•	przeszkoda w postaci obiektu, którego waz nie moze zjesc – waz umiera, koniec gry,
+•	pozywienie premium, które daje +10 do wyniku.
+Obiekty dla weza beda wyswietlane w róznych ilosciach i nie zawsze 
+(np. randomowo w przedziale od 0 do 3).
+
+
+

@@ -1,0 +1,47 @@
+1.08.2017
+Alicja Strak
+alicjastrak94@gmail.com
+
+https://youtu.be/e7DvAbNHyNk
+
+Projekt zaliczeniowy Akademia C#
+1.	Temat projektu.
+Projekt na zaliczenie kursu Akademia c# bedzie gra „Snake”, która bedzie zrealizowana za pomoca WPF w srodowisku Visual Studio.
+2.	Funkcjonalnosci projektu.
+W projekcie zostaly wprowadzone wszystkie funkcjonalnosci opisane w pliku „wstepny opis”. 
+W menu gry zostala umieszczona opcja wyboru koloru weza oraz wpisanie nazwy uzytkownika. Nie wypelnienie obu pól skutkuje brakiem mozliwosci rozpoczecia gry. Po skonczonej grze wynik gracza sprawdzany jest  rekordowym wynikiem. Jesli jest wiekszy, zostanie on zapisany i bedzie wyswietlany w grze.
+W grze „snake” wprowadzono 3 rodzaje pokarmu:
+•	normal food – jedzenie podstawowe, daje +1 pkt do wyniku oraz wydluzenie weza o jeden segment. Pokarm wyswietlany randomowo w ilosci 1-2 szt;
+•	premium food – daje +10 pkt do wyniku oraz wydluzenie weza o jeden segment. Wyswietlana jest tylko 1 sztuka tego pokarmu, pojawia sie co jakis czas (randomowo);
+•	dead food – zjedzenie tego pokarmu skutkuje smiercia weza -> game over.
+Obrazy w grze zostaly pobrane z gogle graphics.
+3.	Inicjalizacja gry.
+W menu gry (MainWindow.xaml) wpisujemy nazwe naszego usera w textBox, Nastepnie wybieramy kolor weza sposród podanej listy w ComboBox. W przypadku niepoprawnego wprowadzenia danych otrzymamy odpowiedni komunikat MessageBox, by wybrac kolor, jesli nie zostal wybrany, wpisac nazwe usera jesli nie zostala wpisana lub uzupelnic obie luki. Czcionke z nazwa gry zaimportowano do projektu (pobrana z internetu). 
+Po wprowadzeniu poprawnych danych i kliknieciu przycisku start game wyswietla sie nowy interfejs (SakeGame.xaml). Po prawej stronie widzimy nasz nick oraz wynik gry, ponizej ustanowiony rekord. Do uzycia mamy 3 przyciski, które umozliwiaja rozpoczecie nowej gry, powrót do menu oraz wylaczenie gry.
+Gra posiada Interfejs IParticle definiujacy wyglad podstawowego elementu wystepujacego w grze. Dziedziczy go klasa Particle. Po klasie Particle dziedzicza klasy NormalFood, PremiumFood, DeadFood oraz PartOfSnake.
+Klasy zawarte w grze:
+?	Klasa Particle: Najbardziej bazowa to klasa Particle, która zawiera lokalizacje punktu x i y oraz ksztalt obiektu – kwadrat o boku 10x10 pikseli. Klasa zawiera metode Draw(), która umozliwia narysowanie obiektu w siatce gridGame oraz konstruktor.
+?	Klasa NormalFood: Dziedziczy po klasie Particle, dodatkowo posiada okreslenie koloru kwadratu – czerwony.
+?	Klasa PremiumFood: Dziedziczy po klasie Particle, dodatkowo posiada okreslenie wygladu kwadratu – wypelniony jest obrazkiem przedstawiajacym gwiazdke.
+?	Klasa DeadFood: Dziedziczy po klasie Particle, dodatkowo posiada okreslenie wygladu kwadratu – wypelniony jest obrazkiem przedstawiajacym czaszke.
+?	Klasa PartOfSnake: Dziedziczy po klasie Particle i reprezentuje ogon weza. Posiada opcje ustawienia koloru kwadratu na taki, jaki wybral uzytkownik.
+?	Klasa Snake: zawiera obiekty klasy PartOfSnake. Obiekt headSnake reprezentuje glowe weza a lista partsSnakeList obiekty skladajace sie na ogon weza. W konstruktorze alokujemy pamiec dla obiektu headSnake oraz ustawiamy mu poczatkowe polozenie na planszy gry, standardowy kolor Beige oraz rozmiar kwadratu 12x12 pikseli. Klasa posiada metody:
+•	DrawSnake(), która rysuje na tablicy calego weza.
+•	AddParts(), która dodaje nowe czesci ogona do listy.
+•	Updatelist(), która zajmuje sie przesuwaniem kazdego elementu ogona w kierunku  przesuwania sie glowy(ruch weza)
+4.	Dzialanie gry:
+W konstruktorze okna SnakeGame wywolujemy metody:
+•	InitializeComponent(); 
+•	CreateBoard() – definiuje rozmiar planszy naszej gry (wysokosc i szerokosc);
+•	CreateSnake() – tworzy obiekt klasy Snake, dodaje glowe weza i jego ogon do gridGame. Nastepnie wywolana jest metoda DrawSnake(), która umozliwia wyswietlenie go na planszy gry;
+•	StartTime() – start czasu gry. Pozwala w interwale czasowym wywolywac metode TimeUpdate(), która wywoluje metode UpdateGame();
+•	MakeFood() – ustawia startowe pozycje pozywienia oraz wyswietla pozywienie na planszy.
+
+Poza tym ustawiamy odpowiednie dane w miejscach na wyniki I nazwy uzytkowników.
+W czasie gry co 90 ms wywolywana jest metoda UpdateGame(), która uaktualnia polozenie weza, sprawdza kolizje za pomoca metod:
+•	BoardCollision() – sprawdza kolizje glowy weza z granicami planszy,
+•	BadColiision() – sprawdza kolizje glowy weza z DeadFood oraz zderzenie ogona z glowa, jesli zostanie wykryte zderzenie gra sie zakonczy,
+•	GoodCollision() – sprawdza kolizje z NormalFood oraz PremiumFood, w przypadku kolizji dodawane sa punkty do wyniku, wydluzany ogon, losuje nowe polozenia dla jedzenia premium, normal oraz dead w przypadku kolizji z NormalFood.
+•	mySnake.DrawSnake() – rysuje uaktualnione polozenie weza.
+
+
